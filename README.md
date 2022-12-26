@@ -1,9 +1,12 @@
-<p align="center">
-  <img style="width:50%; border-radius: 50%" src="public/assets/img/logo.png" alt="logo"/>
-</p>
+<div style="text-align:center">
+  <img  
+    src="public/assets/img/logo.png" 
+    alt="logo"
+    title="Logo Mon coffre des fichiers"
+    style="width: 50%; border-radius: 50%"/>
+</div>
 
-
-<div align="center">
+<div style="text-align:center">
 
 ![alt](https://img.shields.io/badge/PHP->=7.2.5-orange)
 ![alt](https://img.shields.io/badge/Symfony-5.4-green)
