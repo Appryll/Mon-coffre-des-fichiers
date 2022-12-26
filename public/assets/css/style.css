@@ -9,11 +9,15 @@ html{
     height: 100%;
 }
 
-body{
+.login-bg{
     background-image: linear-gradient(to top, #9890e3 0%, #b1f4cf 100%);
     /* background-image: linear-gradient(to top, #a7a6cb 0%, #8989ba 52%, #8989ba 100%); */
     /* background-image: linear-gradient(to top, #a7a6cb 0%, #8989ba 52%, #8989ba 100%); */
     /* background-image: linear-gradient(-20deg, #6e45e2 0%, #88d3ce 100%); */
+}
+
+.home-bg{
+    background-image: linear-gradient(-20deg, #6e45e2 0%, #88d3ce 100%);
 }
 
 .container{margin-top: 7%;}
@@ -40,4 +44,8 @@ body{
 .btn-login{
     border-radius: 50px;
     background-color: rgb(29, 141, 182) !important;
+}
+
+.img-logo{
+    width: 8rem;
 }
