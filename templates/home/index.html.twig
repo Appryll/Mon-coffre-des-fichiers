@@ -25,12 +25,33 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-3 me-2 bg-secondary-subtle border border-success p-2 mb-2 border-opacity-50 rounded border-5">
-            <h5>Ajouter un nouveau fichier</h5>
+        <div class="col-5 me-2 bg-secondary-subtle border border-success p-2 mb-2 border-opacity-50 rounded">
+            <h1 class="display-6">Ajouter un nouveau fichier</h1>
             <hr>
+            {{ form_start(form) }}
+            {{ form_row(form.name) }}
+            <button class="btn btn-success btn-login p-1 col-2 mt-3 offset-10" type="submit">Publier</button>
+            {{ form_end(form) }}
         </div>
-        <div class="col-8 bg-secondary-subtle border border-success p-2 mb-2 border-opacity-50 rounded border-5">
-            <p>jqjdsfqjdf</p>
+        <div class="col-6 bg-secondary-subtle border border-success p-5 mb-2 border-opacity-50 rounded">
+            
+                <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Nom du fichier</th>
+                        <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% for file in fichier %}
+                        <tr>
+                            <td><a href="">{{ file.name }}</a></td>
+                            <td class="text-danger text-center"><i class="fa-regular fa-trash-can fa-lg"></i></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            
         </div>
     </div>
 </div>
