@@ -17,7 +17,59 @@
         {% endblock %}
     </head>
     <body  class="home-bg">
-        {% block body %}{% endblock %}
+        <nav class="navbar navbar-expand-lg bg-transparent shadow p-3">
+
+            <div class="container-fluid">
+                <img class="rounded-circle img-logo" src="{{ asset('assets/img/logo.png') }}" alt="Image Logo">
+                    {% if app.user %}
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                
+                    <li class="nav-item me-5">
+                        <h4>Bienvenu(e) {{ app.user.userIdentifier }}</h4>
+                    </li>
+                    <li class="nav-item me-3">
+                        <a class="nav-link text-success-emphasis" aria-current="page" title="Déconnecxion"
+                            href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>
+                    </li>
+                
+                </ul>
+                </div>
+                    {% endif %}
+            </div>
+            </nav>
+
+            <div class="container">
+            {# -----------------Message-----------------#}
+                {% for type, messages in app.flashes %}
+                    {% for message in messages %}
+                        {% if type == 'error' %}
+                            <div class="alert alert-warning text-center mx-auto mt-4 w-50" role="alert">
+                                <strong>{{ message }}</strong>
+                            </div>
+
+                        {% elseif type == 'success' %}
+                            <div class="alert alert-success text-center mx-auto mt-4 w-50" role="alert">
+                                {{ message }}
+                            </div>
+                        {% elseif type == 'info' %}
+                            <div class="alert alert-info text-center mx-auto mt-4 w-50" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                        
+                    {% endfor %}
+                {% endfor %}
+            {# -----------------Fin Message----------------- #}
+    
+    {% block body %}{% endblock %}
+    
+    {# -----------------Footer----------------- #}
+    <div class="footer">
+        <p class="mt-2 text-capitalize bg-transparent shadow-lg p-3">© {{ "now"|date("Y") }} Copyright: <a class="a-footer" href="https://appryll.github.io/Portfolio-NataliaFabiano/"><<|NF|>></a>- Toute reproduction interdite sans l'autorisation de l'auteur -</p>
+    </div>
+    {# -----------------Fin Footer----------------- #}
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     </body>
 </html>

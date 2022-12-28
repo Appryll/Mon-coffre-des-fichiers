@@ -4,55 +4,14 @@
 
 {% block body %}
 
-<nav class="navbar navbar-expand-lg bg-transparent">
-
-<div class="container-fluid">
-    <img class="rounded-circle img-logo" src="{{ asset('assets/img/logo.png') }}" alt="Image Logo">
-
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-    <ul class="navbar-nav">
-        <li class="nav-item me-5">
-            <h4>Bienvenu(e) {{ app.user.userIdentifier }}</h4>
-        </li>
-        <li class="nav-item me-3">
-            <a class="nav-link text-success-emphasis" aria-current="page" title="Déconnecxion"
-                href="{{ path('app_logout') }}"><i class="fa-solid fa-right-from-bracket fa-2xl"></i></a>
-        </li>
-    </ul>
-    </div>
-
-</div>
-</nav>
-<div class="container">
-{# -----------------Message-----------------#}
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            {% if type == 'error' %}
-                <div class="alert alert-warning text-center mx-auto mt-4 w-50" role="alert">
-                    <strong>{{ message }}</strong>
-                </div>
-
-            {% elseif type == 'success' %}
-                <div class="alert alert-success text-center mx-auto mt-4 w-50" role="alert">
-                    {{ message }}
-                </div>
-            {% elseif type == 'info' %}
-                <div class="alert alert-info text-center mx-auto mt-4 w-50" role="alert">
-                    {{ message }}
-                </div>
-            {% endif %}
-            
-        {% endfor %}
-    {% endfor %}
-{# -----------------Fin Message----------------- #}
-
+{% if app.user %}
     <div class="row">
         <div class="col-5 me-2 bg-secondary-subtle border border-success p-2 mb-2 border-opacity-50 rounded">
             <h1 class="display-6">Ajouter un nouveau fichier</h1>
             <hr>
             {{ form_start(form) }}
             {{ form_row(form.name) }}
-            <button class="btn btn-success btn-login p-1 col-2 mt-3 offset-10" type="submit">Publier</button>
+            <button class="btn btn-success btn-login p-1 col-2 mt-3 offset-10" type="submit">Ajouter</button>
             {{ form_end(form) }}
         </div>
         <div class="col-6 bg-secondary-subtle border border-success p-5 mb-2 border-opacity-50 rounded">
@@ -72,10 +31,17 @@
                         {% endif %}
                         {% for file in fichier %}
                         <tr>
-                            <td><a href="">{{ file.name }}</a></td>
-                            <td class="text-danger text-center">
-                            <a href="{{ path('app_fichier_delete', {id: file.id}) }}"><i class="fa-regular fa-trash-can fa-lg"></i></a>  
+                            <td>{{ file.name }}</td>
+
+                            <td class="text-center">
+                            <a href="" class="text-info" download="{{file.name}}" title="Télécharger"><i class="fa-solid fa-download fa-lg"></i></a>  
                             </td>
+                            <td class="text-center">
+                            <a href="{{ path('app_fichier_delete', {id: file.id}) }}" title="Supprimer" onclick="return confirm('Vous êtes sûr de supprimer l\'image : \
+                            {{ file.name }} ?')" class="text-danger" ><i class="fa-regular fa-trash-can fa-lg"></i></a>  
+                            </td>
+                            
+                            
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -83,5 +49,19 @@
             
         </div>
     </div>
+{% else %}
+    <div class="row">
+        <div class="col-4">
+            <img src="{{ asset('assets/img/404.svg')}}" alt="Image page not found" class="w-100 ms-5">
+        
+        </div>
+        <div class="col-7 ms-5 col-pag-non-connecte rounded">
+            <h1 class="display-6 text-center">Vous n'êtes pas connecté(e)!</h1>
+            <hr>
+            <h3 class="text-center mt-5">Veuillez vous connecter à votre compte pour profiter de l'application    
+            <a href="{{ path('app_login') }}" class="text-success"><i class="fa-solid fa-right-to-bracket fa-xl"></i></a></h3>
+        </div>
+    </div>
+{% endif %}
 </div>
 {% endblock %}

@@ -22,7 +22,7 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 target: app_login
-            
+        
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -49,4 +49,3 @@ when@test:
                 time_cost: 3 # Lowest possible value for argon
                 memory_cost: 10 # Lowest possible value for argon
         
-    
