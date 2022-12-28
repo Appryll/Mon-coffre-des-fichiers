@@ -63,8 +63,10 @@ class FichierType extends AbstractType
                             'text/xml',
                         ],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier valide',
+                        
                     ])
                 ],
+                'empty_data' => '',
             ]);
     }
 

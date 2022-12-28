@@ -6,6 +6,23 @@
 {% block body %}
 
     <div class="container">
+    {# -----------------Message-----------------#}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            {% if type == 'error' %}
+                <div class="alert alert-warning text-center mx-auto mt-4 w-50" role="alert">
+                    <strong>{{ message }}</strong>
+                </div>
+
+            {% elseif type == 'success' %}
+                <div class="alert alert-success text-center mx-auto mt-4 w-50" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            
+        {% endfor %}
+    {% endfor %}
+    {# -----------------Fin Message----------------- #}
 
         <div class="row g-0 row-log bg-light">
             <div class="col-lg-5 py-5">

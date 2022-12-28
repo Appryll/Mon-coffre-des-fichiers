@@ -12,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class HomeController extends AbstractController
 {
@@ -45,6 +46,8 @@ class HomeController extends AbstractController
                     // ... handle exception if something happens during file upload
                 }
                 $file->setName($newFilename);
+            }else{
+                $this->addFlash('error', 'Aucun fichier n\'a été sélectionné');
             }
 
             $courrent = $this->getUser();
@@ -61,8 +64,19 @@ class HomeController extends AbstractController
             'form' => $form,
             'fichier'=>$fichier,
             ]);
-        }
-        
+        }    
     }
+    
+    #[Route('/fichier/{id}', name: 'app_fichier_delete')]
+    public function delete(ManagerRegistry $doctrine, Fichier $fichier = null): Response
+    {
+        $em = $doctrine->getManager();
+
+        $em->remove($fichier);
+        $em->flush();
+        $this->addFlash('info', 'Votre fichier a bien été supprimé.');
+        return $this->redirectToRoute('app_homepage');
+    }
+    
     
 }

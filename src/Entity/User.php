@@ -32,15 +32,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: File::class, orphanRemoval: true)]
-    private Collection $files;
-
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Fichier::class, orphanRemoval: true)]
     private Collection $fichiers;
 
     public function __construct()
     {
-        $this->files = new ArrayCollection();
         $this->fichiers = new ArrayCollection();
     }
 
@@ -133,35 +129,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, File>
-     */
-    public function getFiles(): Collection
-    {
-        return $this->files;
-    }
-
-    public function addFile(File $file): self
-    {
-        if (!$this->files->contains($file)) {
-            $this->files->add($file);
-            $file->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if ($this->files->removeElement($file)) {
-            // set the owning side to null (unless already changed)
-            if ($file->getUser() === $this) {
-                $file->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Fichier>

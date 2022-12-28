@@ -24,6 +24,28 @@
 </div>
 </nav>
 <div class="container">
+{# -----------------Message-----------------#}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            {% if type == 'error' %}
+                <div class="alert alert-warning text-center mx-auto mt-4 w-50" role="alert">
+                    <strong>{{ message }}</strong>
+                </div>
+
+            {% elseif type == 'success' %}
+                <div class="alert alert-success text-center mx-auto mt-4 w-50" role="alert">
+                    {{ message }}
+                </div>
+            {% elseif type == 'info' %}
+                <div class="alert alert-info text-center mx-auto mt-4 w-50" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+            
+        {% endfor %}
+    {% endfor %}
+{# -----------------Fin Message----------------- #}
+
     <div class="row">
         <div class="col-5 me-2 bg-secondary-subtle border border-success p-2 mb-2 border-opacity-50 rounded">
             <h1 class="display-6">Ajouter un nouveau fichier</h1>
@@ -43,10 +65,17 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
+                        {% if fichier|length == 0 %}
+                            <tr>
+                                <td><p>Aucun fichier n'a été téléchargé</p></td>      
+                            </tr>
+                        {% endif %}
                         {% for file in fichier %}
                         <tr>
                             <td><a href="">{{ file.name }}</a></td>
-                            <td class="text-danger text-center"><i class="fa-regular fa-trash-can fa-lg"></i></td>
+                            <td class="text-danger text-center">
+                            <a href="{{ path('app_fichier_delete', {id: file.id}) }}"><i class="fa-regular fa-trash-can fa-lg"></i></a>  
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
