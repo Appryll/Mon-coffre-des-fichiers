@@ -66,7 +66,7 @@ html{
 }
 
 .img-logo{
-    width: 8rem;
+    width: 10%;
 }
 
 .col-pag-non-connecte{
@@ -77,4 +77,8 @@ html{
     text-decoration: none;
     color: black;
     
+}
+
+.img-register{
+    width: 11%;
 }

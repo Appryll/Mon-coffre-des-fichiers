@@ -5,8 +5,8 @@
 {% block body %}
 
 {% if app.user %}
-    <div class="row">
-        <div class="col-5 me-2 bg-secondary-subtle border border-success p-2 mb-2 border-opacity-50 rounded">
+    <div class="row justify-content-around">
+        <div class="col-lg-5 bg-secondary-subtle border border-success p-2 mb-2 border-opacity-50 rounded">
             <h1 class="display-6">Ajouter un nouveau fichier</h1>
             <hr>
             {{ form_start(form) }}
@@ -14,8 +14,8 @@
             <button class="btn btn-success btn-login p-1 col-2 mt-3 offset-10" type="submit">Ajouter</button>
             {{ form_end(form) }}
         </div>
-        <div class="col-6 bg-secondary-subtle border border-success p-5 mb-2 border-opacity-50 rounded">
-            
+        
+        <div class="col-lg-6 ml-auto bg-secondary-subtle border border-success p-5 mb-2 border-opacity-50 rounded">
                 <table class="table">
                     <thead>
                         <tr>
