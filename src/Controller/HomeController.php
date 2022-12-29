@@ -75,9 +75,9 @@ class HomeController extends AbstractController
         $em->remove($fichier);
         $em->flush();
 
-        $fichierFisic = $this->getParameter("file_telecharge_directory"). '/' . $fichier->getName();
-        if(file_exists($fichierFisic)){
-            unlink($fichierFisic);
+        $fichierPhysique = $this->getParameter("file_telecharge_directory"). '/' . $fichier->getName();
+        if(file_exists($fichierPhysique)){
+            unlink($fichierPhysique);
         }
 
         $this->addFlash('info', 'Votre fichier a bien été supprimé.');
