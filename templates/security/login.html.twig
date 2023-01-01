@@ -55,41 +55,21 @@
                         </div>
                     {% endif %}
 
-                    {# <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> #}
-
-                    {# <label for="inputEmail">Email</label> #}
-                    {# <input type="text" id="username" name="_username" value="{{ last_username }}"/> #}
                     <input type="email" value="{{ last_username }}" placeholder="Email" name="email" id="inputEmail"
                         class="form-control input my-4" autocomplete="email" required autofocus>
 
-                    {#<label for="inputPassword">Password</label>#}
-                    {# <input type="password" id="password" name="_password"/> #}
                     <input type="password" placeholder="Mot de passe" name="password" id="inputPassword"
                         class="form-control input my-4" autocomplete="current-password" required>
 
                     <input type="hidden" name="_csrf_token"
                         value="{{ csrf_token('authenticate') }}">
-                    {# <input type="hidden" name="_target_path" 
-                    value="{{ path('account') }}"> #}
+
                     {% if not app.user %}
                         <div class="d-flex justify-content-end">
                             <p>Vous n'êtes pas encore inscrit?, donc ... </p>
                             <a href="{{ path('app_register') }}" class="link-success ms-2">Inscrivez-vous!</a>
                         </div>
                     {% endif %}
-
-
-                    {#
-                    Uncomment this section and add a remember_me option below your firewall to activate remember me
-                    functionality.
-                    See https://symfony.com/doc/current/security/remember_me.html
-
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" name="_remember_me"> Remember me
-                        </label>
-                    </div>
-                    #}
 
                     <button class="btn btn-success btn-login py-3 col-3 offset-9" type="submit">
                         Me connecter
