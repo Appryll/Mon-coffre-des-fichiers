@@ -4,7 +4,10 @@
 
 {% block body %}
 
+{% if not app.user %}
+
 <div class="container shadow p-3 mb-5 bg-body-tertiary rounded">
+    
     <div class="d-flex">
         <img src="{{ asset('assets/img/welcoming.svg')}}" alt="Image upload fichier" class="img-register">
         <h1 class="display-6 mt-5 ms-2">Formulaire d'inscription</h1>
@@ -13,17 +16,33 @@
 
     {{ form_start(registrationForm) }}
     {{ form_row(registrationForm.email, {
-        label: 'Adresse e-mail'
+        label: 'Adresse e-mail',
+        attr:{'placeholder':'contact@contact.com'}
     }) }}
     {{ form_row(registrationForm.plainPassword, {
-        label: 'Mot de passe'
+        label: 'Mot de passe',
+        attr:{'placeholder':'Il doit contenir au moins 6 caractères'}
     }) }}
-    {# {{ form_row(registrationForm.agreeTerms) }} #}
 
     <button class="btn btn-success btn-login py-3 col-3 offset-9" type="submit">M'inscrire</button>
             
     {{ form_end(registrationForm) }}
 
 </div>
-    
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="{{ asset('assets/img/404.svg')}}" alt="Image page not found" class="w-100 ms-5">
+        
+        </div>
+        <div class="col-7 ms-5 col-pag-non-connecte rounded">
+            <h1 class="display-6 text-center">Vous êtes déjà enregistré(e)!</h1>
+            <hr>
+            <h3 class="text-center mt-5">Veuillez vous déconnecter pour vous inscrire avec une autre adresse e-mail
+            <a href="{{ path('app_logout') }}" class="text-success"><i class="fa-solid fa-right-from-bracket fa-xl"></i></a></h3>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}

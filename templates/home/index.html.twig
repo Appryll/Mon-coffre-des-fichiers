@@ -11,7 +11,7 @@
             <hr>
             {{ form_start(form) }}
             {{ form_row(form.name) }}
-            <button class="btn btn-success btn-login p-1 col-2 mt-3 offset-10" type="submit">Ajouter</button>
+            <button class="btn btn-success btn-login p-1 col-2 mt-3 offset-10" onclick="onSubmit()" type="submit">Ajouter</button>
             {{ form_end(form) }}
         </div>
         
@@ -24,27 +24,25 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                        {% if fichier|length == 0 %}
-                            <tr>
-                                <td><p>Aucun fichier n'a été téléchargé</p></td>      
-                            </tr>
-                        {% endif %}
-                        {% for file in fichier %}
-                        <tr>
-                            <td>{{ file.name }}</td>
 
-                            <td class="text-center">
-                            <a href="" class="text-info" download="{{file.name}}" title="Télécharger"><i class="fa-solid fa-download fa-lg"></i></a>  
-                            </td>
-                            <td class="text-center">
-                            <a href="{{ path('app_fichier_delete', {id: file.id}) }}" title="Supprimer" 
-                            onclick="return confirm('Vous êtes sûr de supprimer l\'image : {{ file.name }} ?')"
-                            class="text-danger" ><i class="fa-regular fa-trash-can fa-lg"></i></a>  
-                            </td>
-                            
-                            
-                        </tr>
+                        {% for file in fichier %}
+                            {% if file.user.id == app.user.id %}
+                                <tr>
+                                    <td>{{ file.name }}</td>
+                                    <td>{{ file|length }}</td>
+
+                                    <td class="text-center">
+                                    <a href="" class="text-info" download="{{file.name}}" title="Télécharger"><i class="fa-solid fa-download fa-lg"></i></a>  
+                                    </td>
+                                    <td class="text-center">
+                                    <a href="{{ path('app_fichier_delete', {id: file.id}) }}" title="Supprimer" 
+                                    onclick="return confirm('Vous êtes sûr de supprimer l\'image : {{ file.name }} ?')"
+                                    class="text-danger" ><i class="fa-regular fa-trash-can fa-lg"></i></a>  
+                                    </td>
+                                </tr>   
+                            {% endif %}
                         {% endfor %}
+
                     </tbody>
                 </table>
             

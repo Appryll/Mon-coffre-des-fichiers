@@ -9,10 +9,8 @@ use App\Entity\Fichier;
 use App\Form\FichierType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class HomeController extends AbstractController
 {
@@ -34,7 +32,6 @@ class HomeController extends AbstractController
             if ($fichierTelecharge) {
                 $originalFilename = pathinfo($fichierTelecharge->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                //$newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
                 $newFilename = $safeFilename.'.'.$fichierTelecharge->guessExtension();
 
                 try {
@@ -58,13 +55,15 @@ class HomeController extends AbstractController
             $em->flush();
             $this->addFlash('success', 'Votre fichier a bien été telechargé.');
             return $this->redirectToRoute('app_homepage');
+            
         }
         else{
             return $this->renderForm('home/index.html.twig', [
             'form' => $form,
             'fichier'=>$fichier,
             ]);
-        }    
+        }
+        
     }
     
     #[Route('/fichier/{id}', name: 'app_fichier_delete')]
@@ -82,7 +81,5 @@ class HomeController extends AbstractController
 
         $this->addFlash('info', 'Votre fichier a bien été supprimé.');
         return $this->redirectToRoute('app_homepage');
-    }
-    
-    
+    }   
 }

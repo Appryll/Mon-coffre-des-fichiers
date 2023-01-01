@@ -43,17 +43,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
-
-            // ->add('agreeTerms', CheckboxType::class, [
-            //     'mapped' => false,
-            //     'constraints' => [
-            //         new IsTrue([
-            //             'message' => 'Pour continuer, veuillez bien accepter les termes et conditions',
-            //         ]),
-            //     ],
-            // ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
