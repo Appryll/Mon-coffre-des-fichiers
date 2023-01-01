@@ -6,23 +6,6 @@
 {% block body %}
 
     <div class="container">
-    {# -----------------Message-----------------#}
-    {% for type, messages in app.flashes %}
-        {% for message in messages %}
-            {% if type == 'error' %}
-                <div class="alert alert-warning text-center mx-auto mt-4 w-50" role="alert">
-                    <strong>{{ message }}</strong>
-                </div>
-
-            {% elseif type == 'success' %}
-                <div class="alert alert-success text-center mx-auto mt-4 w-50" role="alert">
-                    {{ message }}
-                </div>
-            {% endif %}
-            
-        {% endfor %}
-    {% endfor %}
-    {# -----------------Fin Message----------------- #}
 
         <div class="row g-0 row-log bg-light">
             <div class="col-lg-5 py-5">
@@ -80,38 +63,4 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-{# <div class="container">
-    <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-    
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
-
-        {# If you want to control the URL the user is redirected to on success
-        <input type="hidden" name="_target_path" value="/account"/> #}
-        {# <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-        <button type="submit">login</button>
-    </form>
-
-    </div>
-</div> #} 
 {% endblock %}
